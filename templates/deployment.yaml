@@ -24,26 +24,14 @@ spec:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          command: ["/tmp/tools/entrypoint.sh"]
+          command: ["/opt/echoip/echoip"]
           args:
-            {{ if .Values.useGeoDb }}
-            - -g
-            {{ end }}
-            {{ if .Values.useReverseLookup }}
-            - -r
-            {{ end }}
-            {{ if .Values.usePortLookup }}
-            - -p
-            {{ end }}
-            {{ if .Values.listenAddr }}
-            - -l {{ .Values.listenAddr }}
-            {{ end }}
-            {{ if .Values.templateFilePath }}
-            - -t {{ .Values.templateFilePath }}
-            {{ end }}
-            {{ if .Values.trustedHeader }}
-            - -h {{ .Values.trustedHeader }}
-            {{ end }}
+            - '-f=/db-shared/GeoLite2-Country.mmdb'
+            - '-c=/db-shared/GeoLite2-City.mmdb '
+            - '-r'
+            - '-p'
+            - '-l=:8080'
+            - '-H=X-Forwarded-For'
           ports:
             - name: http
               containerPort: {{ .Values.port }}
