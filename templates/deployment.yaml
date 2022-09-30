@@ -24,7 +24,7 @@ spec:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          command: ["/tools/entrypoint.sh"]
+          command: ["sh" , "/tools/entrypoint.sh"]
           args:
             {{ if .Values.useGeoDb }}
             - -g
