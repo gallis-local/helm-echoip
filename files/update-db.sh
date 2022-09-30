@@ -18,9 +18,9 @@ download() {
     tmpdir="$(mktemp -d -p "$procdir")"
     cd "$tmpdir" || exit 4
 
-    echo "Downloading: $url/$archive$extra"
-    wget ""$url$1$extra"" -o $archive
-    tar -xvzf "$archive"
+    echo "Downloading: $url$1$extra"
+    wget "$url$1$extra" -O $archive
+    tar -xzvf "$archive"
     mv "$target"*/*.mmdb "$procdir"
 
     echo "Finalizing download: $target"
