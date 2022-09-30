@@ -13,14 +13,17 @@ metadata:
 {{ toYaml .Values.ingress_annotations | indent 4 }}
     {{ end }}
 spec:
+  ingressClassName: {{ .Values.ingressType }}
   rules:
-    - host: {{ .Values.host }}
-      http:
-        paths:
-          - backend:
-              name: {{ template "echoip.fullname" . }}
-              port:
-                number: {{ .Values.service.port }}
+  - host: {{ .Values.host }}
+    http:
+      paths:
+        - backend:
+            name: {{ template "echoip.fullname" . }}
+            port:
+              number: {{ .Values.service.port }}
+      path: /
+      pathType: Prefix                
   {{ if .Values.tls }}              
   tls:
   - hosts:
