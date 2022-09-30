@@ -22,8 +22,8 @@ spec:
             name: {{ template "echoip.fullname" . }}
             port:
               number: {{ .Values.service.port }}
-      path: /
-      pathType: Prefix                
+          path: /
+          pathType: Prefix                
   {{ if .Values.tls }}              
   tls:
   - hosts:
