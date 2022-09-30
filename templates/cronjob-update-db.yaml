@@ -20,6 +20,9 @@ spec:
               image: busybox
               imagePullPolicy: {{ .Values.image.pullPolicy }}
               command: ["/tools/update-db.sh"]
+              envFrom:
+                - secretRef:
+                  name: {{ template "echoip.name " . }}-secret
               volumeMounts:
                 - mountPath: /tools
                   name: tools-volume

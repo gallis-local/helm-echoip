@@ -8,7 +8,9 @@ procdir="$(mktemp -d -p "$dir")"
 cd "$procdir" || exit 3
 
 download() {
-    url="http://geolite.maxmind.com/download/geoip/database"
+
+    url="https://download.maxmind.com/app/geoip_download?edition_id="
+    extra="&license_key=$LICENSE_KEY&suffix=tar.gz"
     target="$1"
     archive="$1.tar.gz"
     echo "Preparing to download: $target"
@@ -17,7 +19,7 @@ download() {
     cd "$tmpdir" || exit 4
 
     echo "Downloading: $url/$archive"
-    wget "$url/$archive"
+    wget "$url/$archive$extra"
     tar -xvzf "$archive"
     mv "$target"*/*.mmdb "$procdir"
 
