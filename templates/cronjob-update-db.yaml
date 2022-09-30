@@ -22,7 +22,7 @@ spec:
               command: ["/tools/update-db.sh"]
               envFrom:
                 - secretRef:
-                  name: echoip-secret
+                    name: echoip-secret
               volumeMounts:
                 - mountPath: /tools
                   name: tools-volume
