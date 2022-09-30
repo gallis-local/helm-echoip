@@ -24,7 +24,7 @@ spec:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          command: ["/tools/entrypoint.sh"]
+          command: ["/tmp/tools/entrypoint.sh"]
           args:
             {{ if .Values.useGeoDb }}
             - -g
@@ -49,7 +49,7 @@ spec:
               containerPort: {{ .Values.port }}
               protocol: TCP
           volumeMounts:
-            - mountPath: /tools
+            - mountPath: /tmp/tools
               name: tools-volume
           {{ if .Values.useGeoDb }}
             - mountPath: /db
