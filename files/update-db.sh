@@ -18,7 +18,7 @@ download() {
     tmpdir="$(mktemp -d -p "$procdir")"
     cd "$tmpdir" || exit 4
 
-    echo "Downloading: $url/$archive"
+    echo "Downloading: $url/$archive$extra"
     wget "$url/$archive$extra"
     tar -xvzf "$archive"
     mv "$target"*/*.mmdb "$procdir"
