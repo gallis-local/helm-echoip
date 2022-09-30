@@ -19,7 +19,7 @@ download() {
     cd "$tmpdir" || exit 4
 
     echo "Downloading: $url/$archive$extra"
-    wget "$url/$archive$extra"
+    wget "$url/$1$extra"
     tar -xvzf "$archive"
     mv "$target"*/*.mmdb "$procdir"
 
