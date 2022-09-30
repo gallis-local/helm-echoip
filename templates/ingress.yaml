@@ -18,8 +18,9 @@ spec:
       http:
         paths:
           - backend:
-              serviceName: {{ template "echoip.fullname" . }}
-              servicePort: {{ .Values.service.port }}
+              name: {{ template "echoip.fullname" . }}
+              port:
+                number: {{ .Values.service.port }}
   {{ if .Values.tls }}              
   tls:
   - hosts:
