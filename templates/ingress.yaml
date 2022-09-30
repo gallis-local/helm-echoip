@@ -20,3 +20,9 @@ spec:
           - backend:
               serviceName: {{ template "echoip.fullname" . }}
               servicePort: {{ .Values.service.port }}
+  {{ if .Values.tls }}              
+  tls:
+  - hosts:
+    - {{ .Values.host }}
+    secretName: {{ .Values.host }}-tls
+  {{ end }}
